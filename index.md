@@ -30,9 +30,11 @@ Authorization: {AUTHORIZATION}
 ```
 
 ## API Endpoints
+## ICG Verify
 ### ICG Verify Process
 #### Description
 Validates the check based on the routing and account numbers provided.
+#### POST
 ```markdown
 curl -X POST \
   --url 'https://verify.icheckdev.com/IcgVerify/Process' \
@@ -68,22 +70,68 @@ This endpoint requires [authentication](https://developers.icheckdev.com/Verify/
 ```markdown
 POST /IcgVerify/Process
 ```
+#### Explorer 
+> Parameter*
+> Request*
+
+|Names|Description|
+|-----|-----------|
+|bankAccount(required)|[ICG Verify Models Icg Verification ICG Verify Bank Account](https://developers.icheckdev.com/Verify/#/http/models/structures/icg-verify-models-icg-verification-icg-verify-bank-account)
+|ruleNum|String Rule number-assigned by MicroBilt|
+|gatewayLive|Boolean Enable or disable the live|
+
+
+
+### ICG Verify Process Extended
+#### Description
+This is the extended version of the ICG Verify feature. It only can be used if the merchant provided has the permission FEATURE_ICG_VERIFY_EXTENDED assigned to the related user authenticated.
+
+This feature exploits all the microbilt options to validate an account based on many other parameters besides the Bank Route Number and Account Number.
+
+The responses on this endpoint are same as the one listed above in the 'ICG Verify Process' section
+
+#### POST
+```markdown
+curl -X POST \
+  --url 'https://verify.icheckdev.com/IcgVerify/ProcessExt' \
+  -H 'Authorization: Authorization'\
+  -H 'Accept: application/json'\
+  -H 'Content-Type: application/json' \
+  --data-raw '{
+  "bankAccount": {
+    "routingNumber": "routingNumber0",
+    "accountNumber": "accountNumber4"
+  }
+}'
+```
+This endpoint requires [authentication](https://developers.icheckdev.com/Verify/#/http/getting-started/how-to-get-started/authorization)
+```markdown
+POST /IcgVerify/ProcessExt
+```
+
+## ICG Verify Legacy
+### ICG Verify Legacy Process
+#### Description
+Validates the check based on the routing and account numbers provided.
+
+#### POST
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+curl -X POST \
+  --url 'https://verify.icheckdev.com/IcgVerifyLegacy/Process' \
+  -H 'Authorization: Authorization'\
+  -H 'Accept: application/json'\
+  -H 'Content-Type: application/json' \
+  --data-raw '{
+  "bankAccount": {
+    "routingNumber": "routingNumber0",
+    "accountNumber": "accountNumber4"
+  }
+}'
+```
+This endpoint requires [authentication](https://developers.icheckdev.com/Verify/#/http/getting-started/how-to-get-started/authorization)
+```markdown
+POST /IcgVerifyLegacy/Process
 ```
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
